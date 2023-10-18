@@ -1,9 +1,15 @@
 import { Component } from 'react';
-import { data as characters } from '../lib/fma-data';
+import { Character } from '../lib/fma-data';
 import './character-ratings.css';
 
-export class CharacterRatings extends Component {
+export class CharacterRatings extends Component<{ characters: Character[] }> {
+  sortByRating(characters: Character[]) {
+    return characters.sort((a, b) => b.votes - a.votes);
+  }
+
   render() {
+    const { characters } = this.props;
+    const topCharacters = this.sortByRating([...characters]).slice(0, 5);
     return (
       <section id='character-ratings'>
         <h4>Top Characters</h4>
@@ -16,7 +22,7 @@ export class CharacterRatings extends Component {
             </tr>
           </thead>
           <tbody>
-            {characters.slice(0, 5).map((character, i) => {
+            {topCharacters.map((character, i) => {
               return (
                 <tr key={i} className={i % 2 ? 'light' : 'dark'}>
                   <td>{character.name}</td>

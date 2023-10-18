@@ -1,7 +1,7 @@
-import { data as characters } from '../lib/fma-data';
+import { Character } from '../lib/fma-data';
 import './character-cards.css';
 
-export const CharacterCards = () => {
+export const CharacterCards = ({ characters }: { characters: Character[] }) => {
   return (
     <section id='character-cards'>
       {characters.map((character, i) => (
